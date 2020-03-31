@@ -1,0 +1,115 @@
+<!DOCTYPE html><html lang="en"><head><meta charSet="utf-8"/><meta http-equiv="X-UA-Compatible" content="IE=edge"/><title>Switch-Case y Funciones · Computación IV,V y VI</title><meta name="viewport" content="width=device-width"/><meta name="generator" content="Docusaurus"/><meta name="description" content="#Switch Case"/><meta name="docsearch:language" content="en"/><meta property="og:title" content="Switch-Case y Funciones · Computación IV,V y VI"/><meta property="og:type" content="website"/><meta property="og:url" content="https://oscarquin27.github.io/computacionune/"/><meta property="og:description" content="#Switch Case"/><meta property="og:image" content="https://oscarquin27.github.io/computacionune/img/undraw_online.svg"/><meta name="twitter:card" content="summary"/><meta name="twitter:image" content="https://oscarquin27.github.io/computacionune/img/undraw_tweetstorm.svg"/><link rel="shortcut icon" href="/computacionune/img/favicon.ico"/><link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/atom-one-dark.min.css"/><script type="text/javascript" src="https://buttons.github.io/buttons.js"></script><script src="/computacionune/js/scrollSpy.js"></script><link rel="stylesheet" href="/computacionune/css/main.css"/><script src="/computacionune/js/codetabs.js"></script></head><body class="sideNavVisible separateOnPageNav"><div class="fixedHeaderContainer"><div class="headerWrapper wrapper"><header><a href="/computacionune/"><img class="logo" src="/computacionune/img/favicon.ico" alt="Computación IV,V y VI"/><h2 class="headerTitleWithLogo">Computación IV,V y VI</h2></a><div class="navigationWrapper navigationSlider"><nav class="slidingNav"><ul class="nav-site nav-site-internal"><li class="siteNavGroupActive"><a href="/computacionune/docs/doc1" target="_self">Docs</a></li><li class=""><a href="/computacionune/help" target="_self">Help</a></li><li class=""><a target="_self">Blog</a></li></ul></nav></div></header></div></div><div class="navPusher"><div class="docMainWrapper wrapper"><div class="docsNavContainer" id="docsNav"><nav class="toc"><div class="toggleNav"><section class="navWrapper wrapper"><div class="navBreadcrumb wrapper"><div class="navToggle" id="navToggler"><div class="hamburger-menu"><div class="line1"></div><div class="line2"></div><div class="line3"></div></div></div><h2><i>›</i><span>Contenido</span></h2><div class="tocToggler" id="tocToggler"><i class="icon-toc"></i></div></div><div class="navGroups"><div class="navGroup"><h3 class="navGroupCategoryTitle">Introducción</h3><ul class=""><li class="navListItem"><a class="navItem" href="/computacionune/docs/doc1">Introducción</a></li></ul></div><div class="navGroup"><h3 class="navGroupCategoryTitle">El entorno de desarrollo</h3><ul class=""><li class="navListItem"><a class="navItem" href="/computacionune/docs/doc2">Entorno de desarrollo</a></li></ul></div><div class="navGroup"><h3 class="navGroupCategoryTitle">Contenido</h3><ul class=""><li class="navListItem"><a class="navItem" href="/computacionune/docs/doc3">Hola Mundo</a></li><li class="navListItem"><a class="navItem" href="/computacionune/docs/doc4">Variables</a></li><li class="navListItem"><a class="navItem" href="/computacionune/docs/doc5">Operadores Matemáticos</a></li><li class="navListItem"><a class="navItem" href="/computacionune/docs/doc6">Condicionales</a></li><li class="navListItem"><a class="navItem" href="/computacionune/docs/doc7">Ciclos FOR y WHILE</a></li><li class="navListItem navListItemActive"><a class="navItem" href="/computacionune/docs/doc8">Switch-Case y Funciones</a></li><li class="navListItem"><a class="navItem" href="/computacionune/docs/doc9">Arrays o Vectores</a></li></ul></div></div></section></div><script>
+            var coll = document.getElementsByClassName('collapsible');
+            var checkActiveCategory = true;
+            for (var i = 0; i < coll.length; i++) {
+              var links = coll[i].nextElementSibling.getElementsByTagName('*');
+              if (checkActiveCategory){
+                for (var j = 0; j < links.length; j++) {
+                  if (links[j].classList.contains('navListItemActive')){
+                    coll[i].nextElementSibling.classList.toggle('hide');
+                    coll[i].childNodes[1].classList.toggle('rotate');
+                    checkActiveCategory = false;
+                    break;
+                  }
+                }
+              }
+
+              coll[i].addEventListener('click', function() {
+                var arrow = this.childNodes[1];
+                arrow.classList.toggle('rotate');
+                var content = this.nextElementSibling;
+                content.classList.toggle('hide');
+              });
+            }
+
+            document.addEventListener('DOMContentLoaded', function() {
+              createToggler('#navToggler', '#docsNav', 'docsSliderActive');
+              createToggler('#tocToggler', 'body', 'tocActive');
+
+              var headings = document.querySelector('.toc-headings');
+              headings && headings.addEventListener('click', function(event) {
+                var el = event.target;
+                while(el !== headings){
+                  if (el.tagName === 'A') {
+                    document.body.classList.remove('tocActive');
+                    break;
+                  } else{
+                    el = el.parentNode;
+                  }
+                }
+              }, false);
+
+              function createToggler(togglerSelector, targetSelector, className) {
+                var toggler = document.querySelector(togglerSelector);
+                var target = document.querySelector(targetSelector);
+
+                if (!toggler) {
+                  return;
+                }
+
+                toggler.onclick = function(event) {
+                  event.preventDefault();
+
+                  target.classList.toggle(className);
+                };
+              }
+            });
+        </script></nav></div><div class="container mainContainer"><div class="wrapper"><div class="post"><header class="postHeader"><h1 class="postHeaderTitle">Switch-Case y Funciones</h1></header><article><div><span><p>#Switch Case
+Las funciones <code>Switch</code> y <code>Case</code> nos permitiran realizar un estudio de casos que permitira ejecutar
+un bloque de codigos. Su funcion es parecida a un condicional ya que realiza una verificacion para cuya expresion
+sea cierta para poder ejecutar el bloque de codigo.</p>
+<p>#Funciones en C
+Las funciones permiten al programador mantener un orden en el codigo y poder identificar facilmente que hace cada bloque de codigo.
+En C, cada funcion debe ser declarada con un tipo, bien sea int, char o float como hemos visto anteriormente o un tipo void que no espera
+retornar ningun resultado. Un ejemplo de una funcion es <code>int main(){}</code> que es la funcion principal, es de tipo entero y por ello espera
+retornar un valor; es por eso que al final colocamos un <code>return 0</code>.</p>
+<p>Las funciones tienen otras propiedades que son los parametros o argumentos que es lo que colocamos dentro de los <code>()</code>. Los parametros o argumentos
+permiten pasar variables a la funcion  y los parametros pueden ser todo tipo de variables. Para inyectar variables a una funcion se debe respetar el orden de los argumentos.</p>
+<pre><code class="hljs css language-c"><span class="hljs-meta">#<span class="hljs-meta-keyword">include</span> <span class="hljs-meta-string">&lt;stdio.h&gt;</span></span>
+<span class="hljs-meta">#<span class="hljs-meta-keyword">include</span> <span class="hljs-meta-string">&lt;stdlib.h&gt;</span></span>
+<span class="hljs-comment">//MENU CON FUNCIONES UTILIZANDO SWITCH CASE</span>
+<span class="hljs-function"><span class="hljs-keyword">void</span> <span class="hljs-title">sumar</span><span class="hljs-params">(<span class="hljs-keyword">int</span> numero1, <span class="hljs-keyword">int</span> numero2)</span></span>{
+    numero1 += numero2;
+    <span class="hljs-built_in">printf</span>(<span class="hljs-string">"\n El resultado es :  %d"</span>, numero1);
+}
+
+<span class="hljs-function"><span class="hljs-keyword">void</span> <span class="hljs-title">contar</span><span class="hljs-params">(<span class="hljs-keyword">int</span> numero)</span></span>{
+    <span class="hljs-keyword">for</span>(<span class="hljs-keyword">int</span> i = <span class="hljs-number">0</span>; i &lt; numero; i++){
+        <span class="hljs-built_in">printf</span>(<span class="hljs-string">"\n%d"</span>, i);
+    }
+}
+<span class="hljs-function"><span class="hljs-keyword">int</span> <span class="hljs-title">main</span><span class="hljs-params">()</span></span>{
+    <span class="hljs-keyword">int</span> opcion = <span class="hljs-number">0</span>;
+    <span class="hljs-keyword">int</span> op;
+
+    <span class="hljs-built_in">printf</span>(<span class="hljs-string">"\n1. Suma de dos numeros"</span>);
+    <span class="hljs-built_in">printf</span>(<span class="hljs-string">"\n2. Contador recursivo"</span>);
+    <span class="hljs-built_in">printf</span>(<span class="hljs-string">"\nColoque una opcion : "</span>);
+    <span class="hljs-built_in">scanf</span>(<span class="hljs-string">"%d"</span>, &amp;opcion);
+
+    <span class="hljs-keyword">switch</span>(opcion){ <span class="hljs-comment">//Abrimos el switch para hacer el estudio de casos</span>
+        <span class="hljs-keyword">case</span> <span class="hljs-number">1</span>: <span class="hljs-keyword">int</span> n1, n2; <span class="hljs-comment">//Evaluamos para la opcion 1 de nuestro menu</span>
+                <span class="hljs-built_in">printf</span>(<span class="hljs-string">"\nColoque dos numeros : "</span>);
+                <span class="hljs-built_in">scanf</span>(<span class="hljs-string">"%d%"</span>, &amp;n1);
+                <span class="hljs-built_in">scanf</span>(<span class="hljs-string">"%d"</span>, &amp;n2);
+                sumar(n1, n2); <span class="hljs-comment">//Aqui llamamos a la funcion sumar que esta declarada anteriormente. Se inyectan ambos valores y dicha funcion espera 2 parametros</span>
+                <span class="hljs-keyword">break</span>; <span class="hljs-comment">//Detenemos la ejecucion del bloque de codigo</span>
+
+        <span class="hljs-keyword">case</span> <span class="hljs-number">2</span>: <span class="hljs-keyword">int</span> n3; <span class="hljs-comment">//Evaluamos para la opcion 2 de nuestro menu</span>
+                <span class="hljs-built_in">printf</span>(<span class="hljs-string">"\n Coloque un numero : "</span>);
+                <span class="hljs-built_in">scanf</span>(<span class="hljs-string">"%d"</span>, &amp;n3);
+                contar(n3);
+                <span class="hljs-keyword">break</span>;
+    }
+
+    <span class="hljs-built_in">printf</span>(<span class="hljs-string">"\n Desea continuar? Si(1), No(2)"</span>);
+    <span class="hljs-built_in">scanf</span>(<span class="hljs-string">"%d"</span>, &amp;op);
+    <span class="hljs-keyword">if</span>(op == <span class="hljs-number">1</span>){
+        system(<span class="hljs-string">"cls"</span>) <span class="hljs-comment">//Limpiamos pantalla</span>
+        main(); <span class="hljs-comment">//Volvemos a llamar a la funcion main para iniciar nuevamente nuestro menu</span>
+    }
+    
+    <span class="hljs-keyword">return</span> <span class="hljs-number">0</span>;
+}
+</code></pre>
+</span></div></article></div><div class="docs-prevnext"><a class="docs-prev button" href="/computacionune/docs/doc7"><span class="arrow-prev">← </span><span>Ciclos FOR y WHILE</span></a><a class="docs-next button" href="/computacionune/docs/doc9"><span>Arrays o Vectores</span><span class="arrow-next"> →</span></a></div></div></div><nav class="onPageNav"></nav></div><footer class="nav-footer" id="footer"><section class="sitemap"><a href="/computacionune/" class="nav-home"><img src="/computacionune/img/favicon.ico" alt="Computación IV,V y VI" width="66" height="58"/></a><div><h5>Docs</h5><a href="/computacionune/docs/en/doc1.html">Getting Started (or other categories)</a><a href="/computacionune/docs/en/doc2.html">Guides (or other categories)</a><a href="/computacionune/docs/en/doc3.html">API Reference (or other categories)</a></div><div><h5>Community</h5><a href="/computacionune/en/users.html">User Showcase</a><a href="https://stackoverflow.com/questions/tagged/" target="_blank" rel="noreferrer noopener">Stack Overflow</a><a href="https://discordapp.com/">Project Chat</a><a href="https://twitter.com/" target="_blank" rel="noreferrer noopener">Twitter</a></div><div><h5>More</h5><a href="/computacionune/blog">Blog</a><a href="https://github.com/">GitHub</a><a class="github-button" data-icon="octicon-star" data-count-href="/facebook/docusaurus/stargazers" data-show-count="true" data-count-aria-label="# stargazers on GitHub" aria-label="Star this project on GitHub">Star</a></div></section><a href="https://opensource.facebook.com/" target="_blank" rel="noreferrer noopener" class="fbOpenSource"><img src="/computacionune/img/oss_logo.png" alt="Facebook Open Source" width="170" height="45"/></a><section class="copyright">Copyright © 2020 Your Name or Your Company Name</section></footer></div></body></html>
